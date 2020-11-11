@@ -10,10 +10,24 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: main.tex
-      - name: push changes to remote
+      - name: push pdf to compile-latex-demo
         run: |
           git config --global user.name "Daniel Ko"
           git config --global user.email "ko28@wisc.edu"
           git add main.pdf
           git commit -m "[github actions] update pdf"
+          git push
+      - name: push pdf to ko28.github.io
+        run: |
+          mkdir ~/.ssh
+          chmod 700 ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          git config --global core.sshCommand "ssh -i ~/.ssh/id_ed25519 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+          git clone --depth=1 git@github.com:ko28/ko28.github.io.git "$GITHUB_WORKSPACE/website"
+             
+          cp -f main.pdf "$GITHUB_WORKSPACE/ko28.github.io/assets/main.pdf"
+          cd "$GITHUB_WORKSPACE/ko28.github.io"
+          git add assets/main.pdf
+          git commit -m "[github actions] compile-latex-demo, update pdf"
           git push
