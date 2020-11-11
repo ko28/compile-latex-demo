@@ -21,9 +21,9 @@ jobs:
         run: |
           mkdir ~/.ssh
           chmod 700 ~/.ssh
-          echo "{{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-add  ~/.ssh/id_ed25519
+          echo "$DEPLOY_KEY" > ~/.ssh/key 
+          chmod 600 ~/.ssh/key
+          git config --global core.sshCommand "ssh -i ~/.ssh/key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
           git clone --depth=1 git@github.com:ko28/ko28.github.io.git "$GITHUB_WORKSPACE/website"
              
           cp -f main.pdf "$GITHUB_WORKSPACE/ko28.github.io/assets/main.pdf"
@@ -31,3 +31,5 @@ jobs:
           git add assets/main.pdf
           git commit -m "[github actions] compile-latex-demo, update pdf"
           git push
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
