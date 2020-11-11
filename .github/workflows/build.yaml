@@ -11,9 +11,9 @@ jobs:
         with:
           root_file: main.tex
       - name: push changes to remote
-          run: |
-            git config --global user.name "Daniel Ko"
-            git config --global user.email "ko28@wisc.edu"
-            git add main.pdf
-            git commit -m "[github actions] update pdf"
-            git push
+        run: |
+          git config --global user.name "Daniel Ko"
+          git config --global user.email "ko28@wisc.edu"
+          git add main.pdf
+          git commit -m "[github actions] update pdf"
+          git push
