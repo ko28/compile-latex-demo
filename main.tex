@@ -32,6 +32,23 @@ Test
 	
 \end{theorem*}
 
+\section{}
+Let $f: A \rightarrow B$ be a function from a set $A$ to a set $B$. Prove that
+$R_{f} \circ R_{f}^{-1} \subseteq\{(b, b): b \in B\}$.
+
+\begin{proof}
+	Let $x = (\alpha,\theta) \in R_{f} \circ R_{f}^{-1}$. This means that there exists a $\phi$ such that
+	$(\alpha,\phi) \in R_{f}^{-1}$ and $(\phi,\theta) \in R_{f}$. We also know that $\alpha,\theta \in B$ and $\phi \in A$.
+	Observe that since $f$ is an isomorphism,
+	\begin{align*}
+		f^{-1} (\alpha)     & = \phi    \\
+		f (f^{-1} (\alpha)) & = f(\phi) \\
+		\alpha              & = f(\phi)
+	\end{align*}
+	This directly implies that $\alpha = \theta$ because $(\phi,\theta) \in R_{f}$. Hence, $x \in \{(b, b): b \in B\}$.\\
+	Therefore, $R_{f} \circ R_{f}^{-1} \subseteq\{(b, b): b \in B\}$.
+\end{proof}
+
 
 %problem 1
 \section{}
