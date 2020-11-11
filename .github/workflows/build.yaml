@@ -28,8 +28,8 @@ jobs:
           git config --global core.sshCommand "ssh -i ~/.ssh/key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
           git clone --depth=1 git@github.com:ko28/ko28.github.io.git "$GITHUB_WORKSPACE/website"
              
-          cp -f main.pdf "$GITHUB_WORKSPACE/website/ko28.github.io/assets/main.pdf"
-          cd "$GITHUB_WORKSPACE/ko28.github.io"
+          cp -f main.pdf "$GITHUB_WORKSPACE/website/assets/main.pdf"
+          cd "$GITHUB_WORKSPACE/website"
           git add assets/main.pdf
           git commit -m "[github actions] compile-latex-demo, update pdf"
           git push
