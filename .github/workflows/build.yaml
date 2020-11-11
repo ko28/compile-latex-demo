@@ -12,8 +12,10 @@ jobs:
           root_file: main.tex
       - name: push pdf to compile-latex-demo
         run: |
+          # configure git
           git config --global user.name "Daniel Ko"
           git config --global user.email "ko28@wisc.edu"
+          # push pdf file to this repo
           git add main.pdf
           git commit -m "[github actions] update pdf"
           git push
@@ -26,7 +28,7 @@ jobs:
           git config --global core.sshCommand "ssh -i ~/.ssh/key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
           git clone --depth=1 git@github.com:ko28/ko28.github.io.git "$GITHUB_WORKSPACE/website"
              
-          cp -f main.pdf "$GITHUB_WORKSPACE/ko28.github.io/assets/main.pdf"
+          cp -f main.pdf "$GITHUB_WORKSPACE/website/ko28.github.io/assets/main.pdf"
           cd "$GITHUB_WORKSPACE/ko28.github.io"
           git add assets/main.pdf
           git commit -m "[github actions] compile-latex-demo, update pdf"
